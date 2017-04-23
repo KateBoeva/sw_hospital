@@ -13,7 +13,7 @@ import java.net.URISyntaxException;
 
 @Configuration
 @EnableWebMvc
-@ComponentScan("ru.itis.hw.contacts")
+@ComponentScan("ru.itis.sw.hospital")
 //@EnableAspectJAutoProxy
 public class WebAppContext extends WebMvcConfigurerAdapter {
 
