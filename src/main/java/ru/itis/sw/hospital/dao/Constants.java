@@ -11,6 +11,9 @@ public class Constants {
     static final String SQL_GET_DOCTORS_BY_HOSPITAL_ID =
             "SELECT * FROM \"doctor\" WHERE id_hospital = :id_hospital";
 
+    static final String SQL_GET_TIMETABLE_BY_DOCTOR_ID =
+            "SELECT * FROM \"timetable\" WHERE id_doctor = :id_doctor";
+
     static final String SQL_ADD_CONTACT =
             "INSERT INTO \"Contacts\"(name, number, email, address) " +
                     "VALUES (:name, :number, :email, :address)";

@@ -62,8 +62,8 @@
     <schema id="20" parent="1" name="public">
       <object-id>2200</object-id>
       <visible>1</visible>
-      <introspection-state-number>2372</introspection-state-number>
-      <introspection-timestamp>2017-04-24.15:12:10.046</introspection-timestamp>
+      <introspection-state-number>2485</introspection-state-number>
+      <introspection-timestamp>2017-04-24.22:21:28.416</introspection-timestamp>
     </schema>
     <schema id="21" parent="1" name="pg_catalog">
       <object-id>11</object-id>
@@ -296,32 +296,39 @@
       <data-type>integer|0</data-type>
     </column>
     <column id="68" parent="35" name="monday">
-      <state-number>2371</state-number>
+      <state-number>2479</state-number>
       <data-type>varchar(500)|0</data-type>
+      <default-expression>&apos;-&apos;::character varying</default-expression>
     </column>
     <column id="69" parent="35" name="tuesday">
-      <state-number>2371</state-number>
+      <state-number>2480</state-number>
       <data-type>varchar(500)|0</data-type>
+      <default-expression>&apos;-&apos;::character varying</default-expression>
     </column>
     <column id="70" parent="35" name="wednesday">
-      <state-number>2371</state-number>
+      <state-number>2481</state-number>
       <data-type>varchar(500)|0</data-type>
+      <default-expression>&apos;-&apos;::character varying</default-expression>
     </column>
     <column id="71" parent="35" name="thursday">
-      <state-number>2371</state-number>
+      <state-number>2482</state-number>
       <data-type>varchar(500)|0</data-type>
+      <default-expression>&apos;-&apos;::character varying</default-expression>
     </column>
     <column id="72" parent="35" name="friday">
-      <state-number>2371</state-number>
+      <state-number>2483</state-number>
       <data-type>varchar(500)|0</data-type>
+      <default-expression>&apos;-&apos;::character varying</default-expression>
     </column>
     <column id="73" parent="35" name="saturday">
-      <state-number>2371</state-number>
+      <state-number>2484</state-number>
       <data-type>varchar(500)|0</data-type>
+      <default-expression>&apos;-&apos;::character varying</default-expression>
     </column>
     <column id="74" parent="35" name="sunday">
-      <state-number>2371</state-number>
+      <state-number>2485</state-number>
       <data-type>varchar(500)|0</data-type>
+      <default-expression>&apos;-&apos;::character varying</default-expression>
     </column>
     <index id="75" parent="35" name="timetable_pkey">
       <object-id>43795</object-id>

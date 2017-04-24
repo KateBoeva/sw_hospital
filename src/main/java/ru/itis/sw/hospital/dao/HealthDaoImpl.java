@@ -6,6 +6,7 @@ import org.springframework.stereotype.Repository;
 import ru.itis.sw.hospital.dao.models.City;
 import ru.itis.sw.hospital.dao.models.Doctor;
 import ru.itis.sw.hospital.dao.models.Hospital;
+import ru.itis.sw.hospital.dao.models.Timetable;
 import ru.itis.sw.hospital.dao.utils.ParamsMapper;
 import ru.itis.sw.hospital.dao.utils.SqlQueryExecutor;
 
@@ -51,6 +52,17 @@ public class HealthDaoImpl implements HealthDao {
         }
     };
 
+    static final RowMapper<Timetable> TIMETABLE_ROW_MAPPER = (resultSet, i) -> {
+        try {
+            return new Timetable(resultSet.getInt("id"), resultSet.getInt("id_doctor"),
+                    resultSet.getString("monday"), resultSet.getString("tuesday"), resultSet.getString("wednesday"),
+                    resultSet.getString("thursday"), resultSet.getString("friday"), resultSet.getString("saturday"),
+                    resultSet.getString("sunday"));
+        } catch (SQLException e) {
+            throw new IllegalArgumentException(e);
+        }
+    };
+
     @Override
     public List<City> getCitites() {
         return mSqlQueryExecutor.queryForObjects(Constants.SQL_GET_CITIES, CITY_ROW_MAPPER);
@@ -66,5 +78,11 @@ public class HealthDaoImpl implements HealthDao {
     public List<Doctor> getDoctors(int hospitalId) {
         Map<String, Object> paramMap = mParamsMapper.asMap(asList("id_hospital"), asList(hospitalId));
         return mSqlQueryExecutor.queryForObjects(Constants.SQL_GET_DOCTORS_BY_HOSPITAL_ID, paramMap, DOCTOR_ROW_MAPPER);
+    }
+
+    @Override
+    public Timetable getTimetable(int doctorId) {
+        Map<String, Object> paramMap = mParamsMapper.asMap(asList("id_doctor"), asList(doctorId));
+        return mSqlQueryExecutor.queryForObject(Constants.SQL_GET_TIMETABLE_BY_DOCTOR_ID, paramMap, TIMETABLE_ROW_MAPPER);
     }
 }

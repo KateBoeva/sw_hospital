@@ -6,9 +6,11 @@ import ru.itis.sw.hospital.dao.HealthDao;
 import ru.itis.sw.hospital.dao.models.City;
 import ru.itis.sw.hospital.dao.models.Doctor;
 import ru.itis.sw.hospital.dao.models.Hospital;
+import ru.itis.sw.hospital.dao.models.Timetable;
 import ru.itis.sw.hospital.dao.models.dto.CityDto;
 import ru.itis.sw.hospital.dao.models.dto.DoctorDto;
 import ru.itis.sw.hospital.dao.models.dto.HospitalDto;
+import ru.itis.sw.hospital.dao.models.dto.TimetableDto;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -58,5 +60,14 @@ public class HealthServiceImpl implements HealthService {
                     doctor.getPatronymic()));
         }
         return dtoDoctors;
+    }
+
+    @Override
+    public TimetableDto getTimetable(int doctorId) {
+        Timetable timetable = mHealthDao.getTimetable(doctorId);
+
+        return new TimetableDto(timetable.getId(), timetable.getDoctorId(), timetable.getMonday(),
+                timetable.getTuesday(), timetable.getWednesday(), timetable.getThursday(),
+                timetable.getFriday(), timetable.getSaturday(), timetable.getSunday());
     }
 }

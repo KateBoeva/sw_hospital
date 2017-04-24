@@ -3,6 +3,7 @@ package ru.itis.sw.hospital.dao;
 import ru.itis.sw.hospital.dao.models.City;
 import ru.itis.sw.hospital.dao.models.Doctor;
 import ru.itis.sw.hospital.dao.models.Hospital;
+import ru.itis.sw.hospital.dao.models.Timetable;
 
 import java.util.List;
 
@@ -13,4 +14,6 @@ public interface HealthDao {
     List<Hospital> getHospitals(int cityId);
 
     List<Doctor> getDoctors(int hospitalId);
+
+    Timetable getTimetable(int doctorId);
 }
