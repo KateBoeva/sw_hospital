@@ -1,13 +1,13 @@
 package ru.itis.sw.hospital.dao;
 
-import ru.itis.sw.hospital.dao.models.City;
-import ru.itis.sw.hospital.dao.models.Doctor;
-import ru.itis.sw.hospital.dao.models.Hospital;
-import ru.itis.sw.hospital.dao.models.Timetable;
+import ru.itis.sw.hospital.dao.models.*;
+import ru.itis.sw.hospital.dao.models.dto.LoginInfoDto;
 
 import java.util.List;
 
 public interface HealthDao {
+
+    TokenObject auth(LoginInfoDto loginInfoDto);
 
     List<City> getCitites();
 

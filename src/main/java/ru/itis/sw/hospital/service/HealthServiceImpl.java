@@ -3,14 +3,8 @@ package ru.itis.sw.hospital.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import ru.itis.sw.hospital.dao.HealthDao;
-import ru.itis.sw.hospital.dao.models.City;
-import ru.itis.sw.hospital.dao.models.Doctor;
-import ru.itis.sw.hospital.dao.models.Hospital;
-import ru.itis.sw.hospital.dao.models.Timetable;
-import ru.itis.sw.hospital.dao.models.dto.CityDto;
-import ru.itis.sw.hospital.dao.models.dto.DoctorDto;
-import ru.itis.sw.hospital.dao.models.dto.HospitalDto;
-import ru.itis.sw.hospital.dao.models.dto.TimetableDto;
+import ru.itis.sw.hospital.dao.models.*;
+import ru.itis.sw.hospital.dao.models.dto.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,6 +19,11 @@ public class HealthServiceImpl implements HealthService {
     @Override
     public String hi(){
         return "Hello";
+    }
+
+    @Override
+    public TokenObject auth(LoginInfoDto loginInfoDto) {
+        return mHealthDao.auth(loginInfoDto);
     }
 
     @Override

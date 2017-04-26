@@ -14,6 +14,15 @@ public class Constants {
     static final String SQL_GET_TIMETABLE_BY_DOCTOR_ID =
             "SELECT * FROM \"timetable\" WHERE id_doctor = :id_doctor";
 
+    static final String SQL_EXIST_LOGIN_BY_LOGIN_PASSWORD =
+            "SELECT COUNT (*) FROM \"user\" WHERE (login = :login AND password = :password)";
+
+    static final String SQL_GET_ID_BY_LOGIN_PASSWORD =
+            "SELECT id FROM \"user\" WHERE (login = :login AND password = :password)";
+
+    static final String SQL_GET_STATUS_BY_LOGIN_PASSWORD =
+            "SELECT id FROM \"user\" WHERE (login = :login AND password = :password)";
+
     static final String SQL_ADD_CONTACT =
             "INSERT INTO \"Contacts\"(name, number, email, address) " +
                     "VALUES (:name, :number, :email, :address)";

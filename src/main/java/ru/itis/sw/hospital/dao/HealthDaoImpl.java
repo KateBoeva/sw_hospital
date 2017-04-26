@@ -3,10 +3,8 @@ package ru.itis.sw.hospital.dao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
-import ru.itis.sw.hospital.dao.models.City;
-import ru.itis.sw.hospital.dao.models.Doctor;
-import ru.itis.sw.hospital.dao.models.Hospital;
-import ru.itis.sw.hospital.dao.models.Timetable;
+import ru.itis.sw.hospital.dao.models.*;
+import ru.itis.sw.hospital.dao.models.dto.LoginInfoDto;
 import ru.itis.sw.hospital.dao.utils.ParamsMapper;
 import ru.itis.sw.hospital.dao.utils.SqlQueryExecutor;
 
@@ -19,6 +17,8 @@ import static java.util.Arrays.asList;
 @Repository
 public class HealthDaoImpl implements HealthDao {
 
+    @Autowired
+    DaoArgumentsVerifier mDaoArgumentsVerifier;
     @Autowired
     private SqlQueryExecutor mSqlQueryExecutor;
     @Autowired
@@ -62,6 +62,20 @@ public class HealthDaoImpl implements HealthDao {
             throw new IllegalArgumentException(e);
         }
     };
+
+    @Override
+    public TokenObject auth(LoginInfoDto loginInfoDto) {
+        try {
+            mDaoArgumentsVerifier.verifyLogin(loginInfoDto.getLogin(), loginInfoDto.getPassword());
+        } catch (IllegalArgumentException e) {
+            throw new IllegalArgumentException("Login/password incorrect");
+        }
+        //берём token
+        Map<String, Object> paramMap = mParamsMapper.asMap(asList("login", "password"),
+                asList(loginInfoDto.getLogin(), loginInfoDto.getPassword()));
+        int status = mSqlQueryExecutor.queryForInt(Constants.SQL_GET_STATUS_BY_LOGIN_PASSWORD, paramMap);
+        return new TokenObject(status==1?"6c7ca345f63f835cb353ff15bd6c5e052ec08e7a":"9c031d62a3c4909b216e1d86b7f69b982bdca0f9", status);
+    }
 
     @Override
     public List<City> getCitites() {
