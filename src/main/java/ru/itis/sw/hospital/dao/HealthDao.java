@@ -7,6 +7,8 @@ import java.util.List;
 
 public interface HealthDao {
 
+    boolean addUser(LoginInfoDto loginInfoDto);
+
     TokenObject auth(LoginInfoDto loginInfoDto);
 
     List<City> getCitites();

@@ -21,6 +21,12 @@ public class HealthServiceImpl implements HealthService {
         return "Hello";
     }
 
+
+    @Override
+    public boolean register(LoginInfoDto loginInfoDto) {
+        return mHealthDao.addUser(loginInfoDto);
+    }
+
     @Override
     public TokenObject auth(LoginInfoDto loginInfoDto) {
         return mHealthDao.auth(loginInfoDto);

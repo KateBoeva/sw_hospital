@@ -34,6 +34,15 @@ public class HealthController {
         return new ResponseEntity<TokenObject>(mHealthService.auth(loginInfoDto), HttpStatus.OK);
     }
     @CrossOrigin(origins = "*")
+    @RequestMapping(value = "/register", method = RequestMethod.POST)
+    public ResponseEntity register(@RequestHeader(value = "ORIGIN") String origin,
+                                            @RequestBody LoginInfoDto loginInfoDto){
+        if(mHealthService.register(loginInfoDto))
+            return new ResponseEntity(HttpStatus.OK);
+        else
+            return new ResponseEntity(HttpStatus.NOT_FOUND);
+    }
+    @CrossOrigin(origins = "*")
     @RequestMapping(value = "/admin/cities", method = RequestMethod.POST)
     public ResponseEntity addCity(@RequestHeader(value = "ORIGIN") String origin,
                                   @RequestBody CityDto dtoCity,

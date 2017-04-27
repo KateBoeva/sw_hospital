@@ -64,13 +64,25 @@ public class HealthDaoImpl implements HealthDao {
     };
 
     @Override
+    public boolean addUser(LoginInfoDto loginInfoDto) {
+        try {
+            mDaoArgumentsVerifier.verifyLogin(loginInfoDto.getLogin(), loginInfoDto.getPassword());
+            return false;
+        } catch (IllegalArgumentException e) {
+            Map<String, Object> paramMap = mParamsMapper.asMap(asList("login", "password"),
+                    asList(loginInfoDto.getLogin(), loginInfoDto.getPassword()));
+            mSqlQueryExecutor.updateQuery(Constants.SQL_ADD_USER, paramMap);
+            return true;
+        }
+    }
+
+    @Override
     public TokenObject auth(LoginInfoDto loginInfoDto) {
         try {
             mDaoArgumentsVerifier.verifyLogin(loginInfoDto.getLogin(), loginInfoDto.getPassword());
         } catch (IllegalArgumentException e) {
             throw new IllegalArgumentException("Login/password incorrect");
         }
-        //берём token
         Map<String, Object> paramMap = mParamsMapper.asMap(asList("login", "password"),
                 asList(loginInfoDto.getLogin(), loginInfoDto.getPassword()));
         int status = mSqlQueryExecutor.queryForInt(Constants.SQL_GET_STATUS_BY_LOGIN_PASSWORD, paramMap);

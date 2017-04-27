@@ -9,6 +9,8 @@ public interface HealthService {
 
     String hi();
 
+    boolean register(LoginInfoDto loginInfoDto);
+
     TokenObject auth(LoginInfoDto loginInfoDto);
 
     List<CityDto> getCitites();
