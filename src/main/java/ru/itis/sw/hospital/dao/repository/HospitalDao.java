@@ -8,5 +8,7 @@ public interface HospitalDao {
 
     List<Hospital> getHospitals(int cityId);
 
+    Hospital getHospital(int id);
+
     void addHospital(Hospital hospital);
 }

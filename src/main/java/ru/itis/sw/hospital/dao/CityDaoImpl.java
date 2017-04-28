@@ -32,8 +32,14 @@ public class CityDaoImpl implements CityDao {
     };
 
     @Override
-    public List<City> getCitites() {
+    public List<City> getCities() {
         return mSqlQueryExecutor.queryForObjects(Constants.SQL_GET_CITIES, CITY_ROW_MAPPER);
+    }
+
+    @Override
+    public City getCity(int id) {
+        Map<String, Object> paramMap = mParamsMapper.asMap(asList("id"), asList(id));
+        return mSqlQueryExecutor.queryForObject(Constants.SQL_GET_CITY_BY_ID, paramMap, CITY_ROW_MAPPER);
     }
 
     @Override

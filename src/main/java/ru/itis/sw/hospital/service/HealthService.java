@@ -12,11 +12,17 @@ public interface HealthService {
 
     TokenObject auth(LoginInfoDto loginInfoDto);
 
-    List<CityDto> getCitites();
+    List<CityDto> getCities();
+
+    CityDto getCity(int id);
 
     List<HospitalDto> getHospitals(int cityId);
 
+    HospitalDto getHospital(int id);
+
     List<DoctorDto> getDoctors(int hospitalId);
+
+    DoctorDto getDoctor(int id);
 
     TimetableDto getTimetable(int doctorId);
 

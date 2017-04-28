@@ -62,8 +62,8 @@
     <schema id="20" parent="1" name="public">
       <object-id>2200</object-id>
       <visible>1</visible>
-      <introspection-state-number>2562</introspection-state-number>
-      <introspection-timestamp>2017-04-28.11:02:39.464</introspection-timestamp>
+      <introspection-state-number>2613</introspection-state-number>
+      <introspection-timestamp>2017-04-28.12:51:31.237</introspection-timestamp>
     </schema>
     <schema id="21" parent="1" name="pg_catalog">
       <object-id>11</object-id>
@@ -102,19 +102,19 @@
     </sequence>
     <table id="31" parent="20" name="city">
       <object-id>43743</object-id>
-      <state-number>2249</state-number>
+      <state-number>2611</state-number>
     </table>
     <table id="32" parent="20" name="doctor">
       <object-id>43767</object-id>
-      <state-number>2541</state-number>
+      <state-number>2613</state-number>
     </table>
     <table id="33" parent="20" name="hospital">
       <object-id>43751</object-id>
-      <state-number>2249</state-number>
+      <state-number>2611</state-number>
     </table>
     <table id="34" parent="20" name="timetable">
       <object-id>43788</object-id>
-      <state-number>2371</state-number>
+      <state-number>2613</state-number>
     </table>
     <table id="35" parent="20" name="users">
       <object-id>43824</object-id>
@@ -205,14 +205,14 @@
       <primary>1</primary>
     </key>
     <foreign-key id="52" parent="32" name="doctor_id_city_fkey">
-      <object-id>43776</object-id>
+      <object-id>51950</object-id>
       <columns>id_city</columns>
       <ref-key>~.city.city_pkey</ref-key>
       <cascade-update-rule>restrict</cascade-update-rule>
       <cascade-delete-rule>restrict</cascade-delete-rule>
     </foreign-key>
     <foreign-key id="53" parent="32" name="doctor_id_hospital_fkey">
-      <object-id>43781</object-id>
+      <object-id>51955</object-id>
       <columns>id_hospital</columns>
       <ref-key>~.hospital.hospital_pkey</ref-key>
       <cascade-update-rule>restrict</cascade-update-rule>
@@ -251,7 +251,7 @@
       <primary>1</primary>
     </key>
     <foreign-key id="60" parent="33" name="hospital_id_city_fkey">
-      <object-id>43760</object-id>
+      <object-id>51960</object-id>
       <columns>id_city</columns>
       <ref-key>~.city.city_pkey</ref-key>
       <cascade-update-rule>restrict</cascade-update-rule>
@@ -315,7 +315,7 @@
       <primary>1</primary>
     </key>
     <foreign-key id="72" parent="34" name="timetable_id_doctor_fkey">
-      <object-id>43797</object-id>
+      <object-id>51965</object-id>
       <columns>id_doctor</columns>
       <ref-key>~.doctor.doctor_pkey</ref-key>
       <cascade-update-rule>restrict</cascade-update-rule>

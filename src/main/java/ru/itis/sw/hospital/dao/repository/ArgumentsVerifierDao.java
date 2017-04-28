@@ -1,4 +1,4 @@
-package ru.itis.sw.hospital.dao;
+package ru.itis.sw.hospital.dao.repository;
 
 public interface ArgumentsVerifierDao {
 

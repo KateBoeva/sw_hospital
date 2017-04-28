@@ -41,14 +41,20 @@ public class HealthServiceImpl implements HealthService {
     }
 
     @Override
-    public List<CityDto> getCitites() {
-        List<City> cities = mCityDao.getCitites();
+    public List<CityDto> getCities() {
+        List<City> cities = mCityDao.getCities();
 
         List<CityDto> dtoCities = new ArrayList<>();
         for (City city : cities) {
             dtoCities.add(new CityDto(city.getId(), city.getName()));
         }
         return dtoCities;
+    }
+
+    @Override
+    public CityDto getCity(int id) {
+        City city = mCityDao.getCity(id);
+        return new CityDto(city.getId(), city.getName());
     }
 
     @Override
@@ -63,6 +69,12 @@ public class HealthServiceImpl implements HealthService {
     }
 
     @Override
+    public HospitalDto getHospital(int id) {
+        Hospital hospital = mHospitalDao.getHospital(id);
+        return new HospitalDto(hospital.getId(), hospital.getName(), hospital.getAddress(), hospital.getCityId());
+    }
+
+    @Override
     public List<DoctorDto> getDoctors(int hospitalId) {
         List<Doctor> doctors = mDoctorDao.getDoctors(hospitalId);
 
@@ -73,6 +85,14 @@ public class HealthServiceImpl implements HealthService {
                     doctor.getPatronymic()));
         }
         return dtoDoctors;
+    }
+
+    @Override
+    public DoctorDto getDoctor(int id) {
+        Doctor doctor = mDoctorDao.getDoctor(id);
+        return new DoctorDto(doctor.getId(), doctor.getName(), doctor.getSurname(), doctor.getCityId(), doctor.getHospitalId(),
+                    doctor.getSpecialization(), doctor.getExperience(), doctor.getRegalies(), doctor.getPhone(),
+                    doctor.getPatronymic());
     }
 
     @Override

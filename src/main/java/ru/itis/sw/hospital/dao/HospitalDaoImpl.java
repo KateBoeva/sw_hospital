@@ -3,6 +3,7 @@ package ru.itis.sw.hospital.dao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
+import ru.itis.sw.hospital.dao.models.City;
 import ru.itis.sw.hospital.dao.models.Hospital;
 import ru.itis.sw.hospital.dao.utils.ParamsMapper;
 import ru.itis.sw.hospital.dao.utils.SqlQueryExecutor;
@@ -36,6 +37,12 @@ public class HospitalDaoImpl implements HospitalDao {
     public List<Hospital> getHospitals(int cityId) {
         Map<String, Object> paramMap = mParamsMapper.asMap(asList("id_city"), asList(cityId));
         return mSqlQueryExecutor.queryForObjects(Constants.SQL_GET_HOSPITALS_BY_CITY_ID, paramMap, HOSPITAL_ROW_MAPPER);
+    }
+
+    @Override
+    public Hospital getHospital(int id) {
+        Map<String, Object> paramMap = mParamsMapper.asMap(asList("id"), asList(id));
+        return mSqlQueryExecutor.queryForObject(Constants.SQL_GET_HOSPITAL_BY_ID, paramMap, HOSPITAL_ROW_MAPPER);
     }
 
     @Override

@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import ru.itis.sw.hospital.dao.models.*;
 import ru.itis.sw.hospital.dao.models.dto.LoginInfoDto;
+import ru.itis.sw.hospital.dao.repository.ArgumentsVerifierDao;
 import ru.itis.sw.hospital.dao.utils.ParamsMapper;
 import ru.itis.sw.hospital.dao.utils.SqlQueryExecutor;
 import ru.itis.sw.hospital.dao.repository.SecurityDao;

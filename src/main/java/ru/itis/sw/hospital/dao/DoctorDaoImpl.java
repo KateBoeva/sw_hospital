@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 import ru.itis.sw.hospital.dao.models.Doctor;
+import ru.itis.sw.hospital.dao.models.Hospital;
 import ru.itis.sw.hospital.dao.utils.ParamsMapper;
 import ru.itis.sw.hospital.dao.utils.SqlQueryExecutor;
 import ru.itis.sw.hospital.dao.repository.DoctorDao;
@@ -42,6 +43,12 @@ public class DoctorDaoImpl implements DoctorDao {
     public List<Doctor> getDoctors(int hospitalId) {
         Map<String, Object> paramMap = mParamsMapper.asMap(asList("id_hospital"), asList(hospitalId));
         return mSqlQueryExecutor.queryForObjects(Constants.SQL_GET_DOCTORS_BY_HOSPITAL_ID, paramMap, DOCTOR_ROW_MAPPER);
+    }
+
+    @Override
+    public Doctor getDoctor(int id) {
+        Map<String, Object> paramMap = mParamsMapper.asMap(asList("id"), asList(id));
+        return mSqlQueryExecutor.queryForObject(Constants.SQL_GET_DOCTOR_BY_ID, paramMap, DOCTOR_ROW_MAPPER);
     }
 
     @Override
