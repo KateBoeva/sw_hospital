@@ -3,10 +3,11 @@ package ru.itis.sw.hospital.dao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
-import ru.itis.sw.hospital.dao.models.Timetable;
-import ru.itis.sw.hospital.dao.utils.ParamsMapper;
-import ru.itis.sw.hospital.dao.utils.SqlQueryExecutor;
-import ru.itis.sw.hospital.dao.repository.TimetableDao;
+import ru.itis.sw.hospital.models.Timetable;
+import ru.itis.sw.hospital.utils.Constants;
+import ru.itis.sw.hospital.utils.ParamsMapper;
+import ru.itis.sw.hospital.utils.SqlQueryExecutor;
+import ru.itis.sw.hospital.repository.TimetableDao;
 
 import java.sql.SQLException;
 import java.util.Map;

@@ -3,11 +3,11 @@ package ru.itis.sw.hospital.dao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
-import ru.itis.sw.hospital.dao.models.City;
-import ru.itis.sw.hospital.dao.models.Hospital;
-import ru.itis.sw.hospital.dao.utils.ParamsMapper;
-import ru.itis.sw.hospital.dao.utils.SqlQueryExecutor;
-import ru.itis.sw.hospital.dao.repository.HospitalDao;
+import ru.itis.sw.hospital.models.Hospital;
+import ru.itis.sw.hospital.utils.Constants;
+import ru.itis.sw.hospital.utils.ParamsMapper;
+import ru.itis.sw.hospital.utils.SqlQueryExecutor;
+import ru.itis.sw.hospital.repository.HospitalDao;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -50,5 +50,11 @@ public class HospitalDaoImpl implements HospitalDao {
         Map<String, Object> paramMap = mParamsMapper.asMap(asList("name", "address", "id_city"),
                 asList(hospital.getName(), hospital.getAddress(), hospital.getCityId()));
         mSqlQueryExecutor.updateQuery(Constants.SQL_ADD_HOSPITAL, paramMap);
+    }
+
+    @Override
+    public void deleteHospital(int id) {
+        Map<String, Object> paramMap = mParamsMapper.asMap(asList("id"), asList(id));
+        mSqlQueryExecutor.updateQuery(Constants.SQL_DELETE_HOSPITAL, paramMap);
     }
 }

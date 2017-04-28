@@ -3,12 +3,12 @@ package ru.itis.sw.hospital.dao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
-import ru.itis.sw.hospital.dao.models.Doctor;
-import ru.itis.sw.hospital.dao.models.Hospital;
-import ru.itis.sw.hospital.dao.utils.ParamsMapper;
-import ru.itis.sw.hospital.dao.utils.SqlQueryExecutor;
-import ru.itis.sw.hospital.dao.repository.DoctorDao;
-import ru.itis.sw.hospital.dao.repository.TimetableDao;
+import ru.itis.sw.hospital.models.Doctor;
+import ru.itis.sw.hospital.utils.Constants;
+import ru.itis.sw.hospital.utils.ParamsMapper;
+import ru.itis.sw.hospital.utils.SqlQueryExecutor;
+import ru.itis.sw.hospital.repository.DoctorDao;
+import ru.itis.sw.hospital.repository.TimetableDao;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -58,5 +58,11 @@ public class DoctorDaoImpl implements DoctorDao {
         mSqlQueryExecutor.updateQuery(Constants.SQL_ADD_DOCTOR, paramMap);
         int doctorId = mSqlQueryExecutor.queryForInt(Constants.SQL_GET_ID_BY_DOCTOR, paramMap);
         mTimetableDao.addTimetable(doctorId);
+    }
+
+    @Override
+    public void deleteDoctor(int id) {
+        Map<String, Object> paramMap = mParamsMapper.asMap(asList("id"), asList(id));
+        mSqlQueryExecutor.updateQuery(Constants.SQL_DELETE_DOCTOR, paramMap);
     }
 }

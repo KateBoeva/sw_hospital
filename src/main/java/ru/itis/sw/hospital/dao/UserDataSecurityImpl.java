@@ -2,12 +2,9 @@ package ru.itis.sw.hospital.dao;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import ru.itis.sw.hospital.dao.utils.ParamsMapper;
-import ru.itis.sw.hospital.dao.utils.SqlQueryExecutor;
-
-import java.util.Map;
-
-import static java.util.Arrays.asList;
+import ru.itis.sw.hospital.repository.UserDataSecurity;
+import ru.itis.sw.hospital.utils.ParamsMapper;
+import ru.itis.sw.hospital.utils.SqlQueryExecutor;
 
 @Component
 public class UserDataSecurityImpl implements UserDataSecurity {
