@@ -10,7 +10,7 @@ import java.util.Map;
 import static java.util.Arrays.asList;
 
 @Component
-public class DaoArgumentsVerifierImpl implements DaoArgumentsVerifier {
+public class ArgumentsVerifierDaoImpl implements ArgumentsVerifierDao {
 
     @Autowired
     private SqlQueryExecutor mSqlQueryExecutor;

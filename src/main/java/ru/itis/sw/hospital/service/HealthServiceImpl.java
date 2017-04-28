@@ -2,39 +2,47 @@ package ru.itis.sw.hospital.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import ru.itis.sw.hospital.dao.HealthDao;
+import ru.itis.sw.hospital.dao.repository.*;
 import ru.itis.sw.hospital.dao.models.*;
 import ru.itis.sw.hospital.dao.models.dto.*;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import static java.lang.Integer.parseInt;
+
 @Component
 public class HealthServiceImpl implements HealthService {
 
 
     @Autowired
-    private HealthDao mHealthDao;
+    private SecurityDao mSecurityDao;
 
-    @Override
-    public String hi(){
-        return "Hello";
-    }
+    @Autowired
+    private CityDao mCityDao;
 
+    @Autowired
+    private HospitalDao mHospitalDao;
+
+    @Autowired
+    private TimetableDao mTimetableDao;
+
+    @Autowired
+    private DoctorDao mDoctorDao;
 
     @Override
     public boolean register(LoginInfoDto loginInfoDto) {
-        return mHealthDao.addUser(loginInfoDto);
+        return mSecurityDao.addUser(loginInfoDto);
     }
 
     @Override
     public TokenObject auth(LoginInfoDto loginInfoDto) {
-        return mHealthDao.auth(loginInfoDto);
+        return mSecurityDao.auth(loginInfoDto);
     }
 
     @Override
     public List<CityDto> getCitites() {
-        List<City> cities = mHealthDao.getCitites();
+        List<City> cities = mCityDao.getCitites();
 
         List<CityDto> dtoCities = new ArrayList<>();
         for (City city : cities) {
@@ -45,7 +53,7 @@ public class HealthServiceImpl implements HealthService {
 
     @Override
     public List<HospitalDto> getHospitals(int cityId) {
-        List<Hospital> hospitals = mHealthDao.getHospitals(cityId);
+        List<Hospital> hospitals = mHospitalDao.getHospitals(cityId);
 
         List<HospitalDto> dtoHospitals = new ArrayList<>();
         for (Hospital hospital : hospitals) {
@@ -56,7 +64,7 @@ public class HealthServiceImpl implements HealthService {
 
     @Override
     public List<DoctorDto> getDoctors(int hospitalId) {
-        List<Doctor> doctors = mHealthDao.getDoctors(hospitalId);
+        List<Doctor> doctors = mDoctorDao.getDoctors(hospitalId);
 
         List<DoctorDto> dtoDoctors = new ArrayList<>();
         for (Doctor doctor : doctors) {
@@ -69,10 +77,39 @@ public class HealthServiceImpl implements HealthService {
 
     @Override
     public TimetableDto getTimetable(int doctorId) {
-        Timetable timetable = mHealthDao.getTimetable(doctorId);
+        Timetable timetable = mTimetableDao.getTimetable(doctorId);
+
 
         return new TimetableDto(timetable.getId(), timetable.getDoctorId(), timetable.getMonday(),
                 timetable.getTuesday(), timetable.getWednesday(), timetable.getThursday(),
                 timetable.getFriday(), timetable.getSaturday(), timetable.getSunday());
+    }
+
+    @Override
+    public void addCity(CityDto dtoCity) {
+        City city = new City(0, dtoCity.getName());
+        mCityDao.addCity(city);
+    }
+
+    @Override
+    public void addHospital(HospitalDto dtoHospital, int cityId) {
+        Hospital hospital = new Hospital(0, dtoHospital.getName(), dtoHospital.getAddress(), cityId);
+        mHospitalDao.addHospital(hospital);
+    }
+
+    @Override
+    public void addDoctor(DoctorDto dtoDoctor, int cityId, int hospitalId) {
+        Doctor doctor = new Doctor(0, dtoDoctor.getName(), dtoDoctor.getSurname(), cityId, hospitalId,
+                dtoDoctor.getSpecialization(), dtoDoctor.getExperience(), dtoDoctor.getRegalies(), dtoDoctor.getPhone(),
+                dtoDoctor.getPatronymic());
+        mDoctorDao.addDoctor(doctor);
+    }
+
+    @Override
+    public void changeTimetable(TimetableDto dtoTimetable, int doctorId) {
+        Timetable timetable = new Timetable(dtoTimetable.getId(), doctorId, dtoTimetable.getMonday(),
+                dtoTimetable.getTuesday(), dtoTimetable.getWednesday(), dtoTimetable.getThursday(), dtoTimetable.getFriday(),
+                dtoTimetable.getSaturday(), dtoTimetable.getSunday());
+        mTimetableDao.changeTimetable(timetable);
     }
 }

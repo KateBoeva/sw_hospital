@@ -22,12 +22,6 @@ public class HealthController {
     private UserDataSecurity mUserDataSecurity;
 
     @CrossOrigin(origins = "*")
-    @RequestMapping(value = "/health/hello", method = RequestMethod.GET)
-    public ResponseEntity<String> hi(){
-        return new ResponseEntity<String>(mHealthService.hi(), HttpStatus.OK);
-    }
-
-    @CrossOrigin(origins = "*")
     @RequestMapping(value = "/auth", method = RequestMethod.POST)
     public ResponseEntity<TokenObject> auth(@RequestHeader(value = "ORIGIN") String origin,
                                             @RequestBody LoginInfoDto loginInfoDto){
@@ -46,10 +40,12 @@ public class HealthController {
     @RequestMapping(value = "/admin/cities", method = RequestMethod.POST)
     public ResponseEntity addCity(@RequestHeader(value = "ORIGIN") String origin,
                                   @RequestBody CityDto dtoCity,
-                                  @RequestBody String token){
-        if(mUserDataSecurity.verifyToken(token))
+                                  @RequestParam("token") String token){
+
+        if(mUserDataSecurity.verifyAdminToken(token) && !mUserDataSecurity.isEmpty(dtoCity.getName())) {
+            mHealthService.addCity(dtoCity);
             return new ResponseEntity(HttpStatus.OK);
-        else
+        } else
             return new ResponseEntity(null, HttpStatus.NOT_FOUND);
     }
     @CrossOrigin(origins = "*")
@@ -57,10 +53,11 @@ public class HealthController {
     public ResponseEntity addHospital(@RequestHeader(value = "ORIGIN") String origin,
                                       @PathVariable("id_city") int cityId,
                                       @RequestBody HospitalDto dtoHospital,
-                                      @RequestBody String token){
-        if(mUserDataSecurity.verifyToken(token))
+                                      @RequestParam("token") String token){
+        if(mUserDataSecurity.verifyAdminToken(token) && !mUserDataSecurity.isEmpty(dtoHospital.getName()) && !mUserDataSecurity.isEmpty(dtoHospital.getAddress())) {
+            mHealthService.addHospital(dtoHospital, cityId);
             return new ResponseEntity(HttpStatus.OK);
-        else
+        } else
             return new ResponseEntity(null, HttpStatus.NOT_FOUND);
     }
     @CrossOrigin(origins = "*")
@@ -69,14 +66,30 @@ public class HealthController {
                                     @PathVariable("id_city") int cityId,
                                     @PathVariable("id_hospital") int hospitalId,
                                     @RequestBody DoctorDto dtoDoctor,
-                                    @RequestBody String token){
-        if(mUserDataSecurity.verifyToken(token))
+                                    @RequestParam("token") String token){
+        if(mUserDataSecurity.verifyAdminToken(token) && !mUserDataSecurity.isEmpty(dtoDoctor.getName())
+                && !mUserDataSecurity.isEmpty(dtoDoctor.getSurname()) && !mUserDataSecurity.isEmpty(dtoDoctor.getSpecialization())
+                && !mUserDataSecurity.isEmpty(dtoDoctor.getExperience()) && !mUserDataSecurity.isEmpty(dtoDoctor.getRegalies())
+                && !mUserDataSecurity.isEmpty(dtoDoctor.getPhone()) && !mUserDataSecurity.isEmpty(dtoDoctor.getPatronymic())) {
+            mHealthService.addDoctor(dtoDoctor, cityId, hospitalId);
             return new ResponseEntity(HttpStatus.OK);
-        else
+        } else
             return new ResponseEntity(null, HttpStatus.NOT_FOUND);
     }
-
-
+    @CrossOrigin(origins = "*")
+    @RequestMapping(value = "/admin/cities/{id_city}/hospitals/{id_hospital}/doctors/{id_doctor}/timetable", method = RequestMethod.POST)
+    public ResponseEntity changeTimetabe(@RequestHeader(value = "ORIGIN") String origin,
+                                    @PathVariable("id_city") int cityId,
+                                    @PathVariable("id_hospital") int hospitalId,
+                                    @PathVariable("id_doctor") int doctorId,
+                                    @RequestBody TimetableDto dtoTimetable,
+                                    @RequestParam("token") String token){
+        if(mUserDataSecurity.verifyAdminToken(token)) {
+            mHealthService.changeTimetable(dtoTimetable, doctorId);
+            return new ResponseEntity(HttpStatus.OK);
+        } else
+            return new ResponseEntity(null, HttpStatus.NOT_FOUND);
+    }
 
     @CrossOrigin(origins = "*")
     @RequestMapping(value = "/health/cities", method = RequestMethod.GET)
@@ -91,16 +104,16 @@ public class HealthController {
     }
     @CrossOrigin(origins = "*")
     @RequestMapping(value = "/health/cities/{id_city}/hospitals/{id_hospital}/doctors", method = RequestMethod.GET)
-    public ResponseEntity<List<DoctorDto>> getHospitals(@RequestHeader(value = "ORIGIN") String origin,
+    public ResponseEntity<List<DoctorDto>> getВщсещкs(@RequestHeader(value = "ORIGIN") String origin,
                                                         @PathVariable("id_city") int cityId,
                                                         @PathVariable("id_hospital") int hospitalId){
         return new ResponseEntity<List<DoctorDto>>(mHealthService.getDoctors(hospitalId), HttpStatus.OK);
     }
     @CrossOrigin(origins = "*")
-    @RequestMapping(value = "/timetable/{id_doctor}/{token}", method = RequestMethod.GET)
+    @RequestMapping(value = "/timetable/{id_doctor}", method = RequestMethod.GET)
     public ResponseEntity<TimetableDto> getTimetable(@RequestHeader(value = "ORIGIN") String origin,
                                                      @PathVariable("id_doctor") int doctorId,
-                                                     @PathVariable("token") String token){
+                                                     @RequestParam("token") String token){
         if(mUserDataSecurity.verifyToken(token))
             return new ResponseEntity<TimetableDto>(mHealthService.getTimetable(doctorId), HttpStatus.OK);
         else

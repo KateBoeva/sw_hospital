@@ -62,8 +62,8 @@
     <schema id="20" parent="1" name="public">
       <object-id>2200</object-id>
       <visible>1</visible>
-      <introspection-state-number>2522</introspection-state-number>
-      <introspection-timestamp>2017-04-27.19:18:13.042</introspection-timestamp>
+      <introspection-state-number>2562</introspection-state-number>
+      <introspection-timestamp>2017-04-28.11:02:39.464</introspection-timestamp>
     </schema>
     <schema id="21" parent="1" name="pg_catalog">
       <object-id>11</object-id>
@@ -106,7 +106,7 @@
     </table>
     <table id="32" parent="20" name="doctor">
       <object-id>43767</object-id>
-      <state-number>2371</state-number>
+      <state-number>2541</state-number>
     </table>
     <table id="33" parent="20" name="hospital">
       <object-id>43751</object-id>
@@ -173,9 +173,9 @@
       <data-type>varchar(100)|0</data-type>
     </column>
     <column id="46" parent="32" name="experience">
-      <state-number>2249</state-number>
+      <state-number>2541</state-number>
       <mandatory>1</mandatory>
-      <data-type>integer|0</data-type>
+      <data-type>varchar(2)|0</data-type>
     </column>
     <column id="47" parent="32" name="regalies">
       <state-number>2249</state-number>
@@ -258,7 +258,7 @@
       <cascade-delete-rule>restrict</cascade-delete-rule>
     </foreign-key>
     <column id="61" parent="34" name="id">
-      <state-number>2371</state-number>
+      <state-number>2562</state-number>
       <mandatory>1</mandatory>
       <data-type>integer|0</data-type>
       <default-expression>nextval(&apos;timetable_id_seq&apos;::regclass)</default-expression>

@@ -26,4 +26,16 @@ public class UserDataSecurityImpl implements UserDataSecurity {
             return true;
         return false;
     }
+
+    @Override
+    public boolean verifyAdminToken(String token) {
+        if(token.equals("6c7ca345f63f835cb353ff15bd6c5e052ec08e7a"))
+            return true;
+        return false;
+    }
+
+    @Override
+    public boolean isEmpty(String s) {
+        return s == null || s.equals("");
+    }
 }
