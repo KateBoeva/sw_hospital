@@ -6,7 +6,7 @@
 
     <groupId>semestr-1</groupId>
     <artifactId>semestr-1</artifactId>
-    <version>3.0-SNAPSHOT</version>
+    <version>4.0-SNAPSHOT</version>
     <packaging>war</packaging>
 
     <build>
