@@ -47,13 +47,13 @@ public class CityController {
 
     @CrossOrigin(origins = "*")
     @RequestMapping(value = "/health/cities/{id_city}", method = RequestMethod.DELETE)
-    public ResponseEntity deleteCity(@RequestHeader(value = "ORIGIN") String origin,
+    public ResponseEntity<List<CityDto>> deleteCity(@RequestHeader(value = "ORIGIN") String origin,
                                      @PathVariable("id_city") int cityId,
                                      @RequestParam("token") String token){
         if(mUserDataSecurity.verifyAdminToken(token)) {
             mCityService.deleteCity(cityId);
-            return new ResponseEntity(HttpStatus.OK);
+            return new ResponseEntity<List<CityDto>>(mCityService.getCities(), HttpStatus.OK);
         } else
-            return new ResponseEntity(HttpStatus.NOT_FOUND);
+            return new ResponseEntity<List<CityDto>>(HttpStatus.NOT_FOUND);
     }
 }

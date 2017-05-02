@@ -56,15 +56,15 @@ public class DoctorController {
 
     @CrossOrigin(origins = "*")
     @RequestMapping(value = "/health/cities/{id_city}/hospitals/{id_hospital}/doctors/{id_doctor}", method = RequestMethod.DELETE)
-    public ResponseEntity deleteDoctor(@RequestHeader(value = "ORIGIN") String origin,
+    public ResponseEntity<List<DoctorDto>> deleteDoctor(@RequestHeader(value = "ORIGIN") String origin,
                                        @PathVariable("id_city") int cityId,
                                        @PathVariable("id_hospital") int hospitalId,
                                        @PathVariable("id_doctor") int doctorId,
                                        @RequestParam("token") String token){
         if(mUserDataSecurity.verifyAdminToken(token)) {
             mDoctorService.deleteDoctor(doctorId);
-            return new ResponseEntity(HttpStatus.OK);
+            return new ResponseEntity<List<DoctorDto>>(mDoctorService.getDoctors(hospitalId), HttpStatus.OK);
         } else
-            return new ResponseEntity(HttpStatus.NOT_FOUND);
+            return new ResponseEntity<List<DoctorDto>>(HttpStatus.NOT_FOUND);
     }
 }
