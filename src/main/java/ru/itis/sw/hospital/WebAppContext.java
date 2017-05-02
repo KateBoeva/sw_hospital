@@ -3,6 +3,7 @@ package ru.itis.sw.hospital;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
@@ -14,7 +15,7 @@ import java.net.URISyntaxException;
 @Configuration
 @EnableWebMvc
 @ComponentScan("ru.itis.sw.hospital")
-//@EnableAspectJAutoProxy
+@EnableAspectJAutoProxy
 public class WebAppContext extends WebMvcConfigurerAdapter {
 
     @Bean
